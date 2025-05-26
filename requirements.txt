@@ -1,0 +1,14 @@
+# Bot de Telegram
+python-telegram-bot==20.6
+SQLAlchemy==2.0.23
+python-dotenv==1.0.0
+pillow==10.1.0
+
+# API
+fastapi==0.105.0
+uvicorn==0.24.0
+pydantic==2.5.2
+pyjwt==2.8.0
+python-multipart==0.0.6
+passlib==1.7.4
+bcrypt==4.0.1

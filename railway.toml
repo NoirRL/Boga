@@ -1,0 +1,17 @@
+[build]
+builder = "nixpacks"
+
+[[services]]
+name = "bot"
+nixpacks.build.cmd = "pip install -r requirements.txt"
+nixpacks.start.cmd = "python bot/bot_main.py"
+
+[[services]]
+name = "server"
+nixpacks.build.cmd = "npm install"
+nixpacks.start.cmd = "node server/server.js"
+
+[[services]]
+name = "database"
+image = "postgres:14"
+env = { POSTGRES_USER = "postgres", POSTGRES_PASSWORD = "postgres", POSTGRES_DB = "storebot" }

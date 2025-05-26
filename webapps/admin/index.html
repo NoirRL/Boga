@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Panel de Administración</h1>
+      <nav>
+        <button class="tab-button active" data-tab="products">Productos</button>
+        <button class="tab-button" data-tab="appointments">Citas</button>
+        <button class="tab-button" data-tab="admins">Administradores</button>
+        <button class="tab-button" data-tab="invoices">Facturas</button>
+      </nav>
+    </header>
+    
+    <main>
+      <div id="products-tab" class="tab-content active">
+        <!-- Contenido de la pestaña de productos -->
+        <h2>Gestión de Productos</h2>
+        <div class="actions-bar">
+          <button class="add-button" id="add-product-btn">Añadir Producto</button>
+          <div class="search-filter">
+            <input type="text" id="search-input" placeholder="Buscar productos...">
+            <select id="category-filter">
+              <option value="">Todas las categorías</option>
+              <!-- Las categorías se cargarán dinámicamente -->
+            </select>
+          </div>
+        </div>
+        
+        <div id="products-table-container">
+          <table class="products-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="products-list">
+              <!-- Los productos se cargarán aquí dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div id="appointments-tab" class="tab-content">
+        <!-- Contenido de la pestaña de citas -->
+        <h2>Gestión de Citas</h2>
+        <div class="filters">
+          <div class="filter-group">
+            <label for="appointment-date-from">Desde:</label>
+            <input type="date" id="appointment-date-from">
+          </div>
+          
+          <div class="filter-group">
+            <label for="appointment-date-to">Hasta:</label>
+            <input type="date" id="appointment-date-to">
+          </div>
+          
+          <div class="filter-group">
+            <label for="appointment-status-filter">Estado:</label>
+            <select id="appointment-status-filter">
+              <option value="">Todos</option>
+              <option value="pending">Pendientes</option>
+              <option value="confirmed">Confirmados</option>
+              <option value="cancelled">Cancelados</option>
+            </select>
+          </div>
+          
+          <button id="appointment-apply-filters" class="primary-btn">Aplicar Filtros</button>
+        </div>
+        
+        <table class="appointments-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Cliente</th>
+              <th>Fecha y Hora</th>
+              <th>Estado</th>
+              <th>Notas</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="appointments-list">
+            <!-- Las citas se cargarán aquí dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+      
+      <div id="admins-tab" class="tab-content">
+        <h2>Gestión de Administradores</h2>
+        <div class="actions-bar">
+          <button class="add-button" id="add-admin-btn">Añadir Administrador</button>
+          <button class="add-button" id="promote-super-admin-btn" style="display: none; background-color: #9c27b0;">Promover a Superadmin</button>
+          <div class="search-filter">
+            <input type="text" id="admin-search-input" placeholder="Buscar administradores...">
+          </div>
+        </div>
+        
+        <table class="admins-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Fecha añadido</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="admins-list">
+            <!-- Los administradores se cargarán aquí dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="invoices-tab" class="tab-content">
+        <!-- Contenido de la pestaña de facturas -->
+        <h2>Gestión de Facturas</h2>
+        <div class="filters">
+          <div class="filter-group">
+            <label for="invoice-date-from">Desde:</label>
+            <input type="date" id="invoice-date-from">
+          </div>
+          
+          <div class="filter-group">
+            <label for="invoice-date-to">Hasta:</label>
+            <input type="date" id="invoice-date-to">
+          </div>
+          
+          <div class="filter-group">
+            <label for="invoice-status-filter">Estado:</label>
+            <select id="invoice-status-filter">
+              <option value="">Todos</option>
+              <option value="pending">Pendientes</option>
+              <option value="completed">Completadas</option>
+              <option value="cancelled">Canceladas</option>
+            </select>
+          </div>
+          
+          <button id="invoice-apply-filters" class="primary-btn">Aplicar Filtros</button>
+        </div>
+        
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="invoices-list">
+              <!-- Las facturas se cargarán aquí dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+    
+  <!-- Modales -->
+  <div id="product-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Añadir Nuevo Producto</h3>
+        <button class="close-button">&times;</button>
+      </div>
+      
+      <form id="product-form">
+        <div class="form-group">
+          <label for="product-name">Nombre:</label>
+          <input type="text" id="product-name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="product-description">Descripción:</label>
+          <textarea id="product-description" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="product-price">Precio:</label>
+          <input type="number" id="product-price" step="0.01" min="0" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="product-category">Categoría:</label>
+          <input type="text" id="product-category" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="product-stock">Stock:</label>
+          <input type="number" id="product-stock" min="0" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="product-image">Imagen URL:</label>
+          <input type="text" id="product-image">
+        </div>
+        
+        <!-- Campos integrados para tallas y colores -->
+        <div class="form-group">
+          <label for="product-sizes-input">Tallas disponibles:</label>
+          <div class="tags-input-container">
+            <input type="text" id="product-sizes-input" placeholder="Añadir talla y presionar Enter">
+            <div id="product-sizes-tags" class="tags-container"></div>
+            <input type="hidden" id="product-sizes" value="[]">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="product-colors-input">Colores disponibles:</label>
+          <div class="tags-input-container">
+            <input type="text" id="product-colors-input" placeholder="Añadir color y presionar Enter">
+            <div id="product-colors-tags" class="tags-container"></div>
+            <input type="hidden" id="product-colors" value="[]">
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" id="cancel-product">Cancelar</button>
+          <button type="submit">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal para añadir/editar administrador -->
+  <div id="admin-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="admin-modal-title">Añadir Administrador</h2>
+        <button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="admin-form">
+          <div class="form-group">
+            <label for="admin-telegram-id">ID de Telegram del Usuario</label>
+            <input type="text" id="admin-telegram-id" required placeholder="Ej: 1234567890">
+            <small>Este ID es necesario para identificar al usuario.</small>
+          </div>
+          <div class="form-actions">
+            <button type="button" id="cancel-admin" class="btn-cancel">Cancelar</button>
+            <button type="submit" class="btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para confirmar eliminación de admin -->
+  <div id="remove-admin-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Confirmar Eliminación</h2>
+        <button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro de que deseas quitar los permisos de administrador a este usuario?</p>
+        <div class="form-actions">
+          <button type="button" id="cancel-remove-admin" class="btn-cancel">Cancelar</button>
+          <button type="button" id="confirm-remove-admin" class="btn-danger">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para confirmar eliminación de producto -->
+  <div id="delete-modal" class="modal">
+    <div class="modal-content confirmation">
+      <div class="modal-header">
+        <h3>Confirmar Eliminación</h3>
+        <button class="close-button">&times;</button>
+      </div>
+      <p>¿Estás seguro de que deseas eliminar este producto? Esta acción no se puede deshacer.</p>
+      <div class="form-actions">
+        <button id="cancel-delete">Cancelar</button>
+        <button id="confirm-delete" class="delete-button">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para detalles de cita -->
+  <div id="appointment-details-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Detalles de la Cita</h3>
+        <button class="close-button">&times;</button>
+      </div>
+      <div id="appointment-details" class="appointment-details">
+        <!-- Se llenará dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para detalles de factura -->
+  <div id="invoice-details-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Detalles de Factura</h2>
+        <button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body" id="invoice-details">
+        <!-- Los detalles de la factura se cargarán aquí -->
+      </div>
+      <div class="modal-footer">
+        <button id="download-invoice-btn" class="btn-primary">Descargar PDF</button>
+        <div class="status-actions">
+          <button id="complete-invoice-btn" class="btn-confirm">Marcar como Completada</button>
+          <button id="cancel-invoice-btn" class="btn-cancel">Cancelar Factura</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para ver cliente -->
+  <div id="customer-details-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Datos del Cliente</h2>
+        <button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body" id="customer-details">
+        <!-- Los detalles del cliente se cargarán aquí -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificaciones y loader -->
+  <div id="notification" class="notification"></div>
+  <div id="loader" class="loader-container">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../shared/js/utils.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/appointments.js"></script>
+  <script src="js/admins.js"></script>
+  <script src="js/invoices.js"></script>
+</body>
+</html>

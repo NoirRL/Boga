@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Productos</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Añadir jsPDF para generación de PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Catálogo de Productos</h1>
+      <div class="cart-icon" id="cart-icon">
+        <span class="cart-count" id="cart-count">0</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      </div>
+      <div class="filters">
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="Buscar productos...">
+        </div>
+        <div class="category-filter">
+          <select id="category-filter">
+            <option value="">Todas las categorías</option>
+          </select>
+        </div>
+      </div>
+    </header>
+    
+    <main>
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Cargando productos...</p>
+      </div>
+      
+      <div id="products-container" class="products-grid">
+        <!-- Los productos se cargarán aquí dinámicamente -->
+      </div>
+      
+      <div id="no-products" class="no-products" style="display: none;">
+        <p>No se encontraron productos con los filtros actuales.</p>
+      </div>
+    </main>
+    
+    <footer>
+      <p>Tienda de Ropa © 2025</p>
+    </footer>
+  </div>
+
+  <!-- Modal de detalles del producto -->
+  <div id="product-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <div id="product-details" class="product-details">
+        <!-- Detalles del producto -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal del carrito -->
+  <div id="cart-modal" class="modal" role="dialog" aria-labelledby="cart-title" aria-hidden="true">
+    <div class="modal-content">
+      <span class="close-button" role="button" aria-label="Cerrar">&times;</span>
+      <h2 id="cart-title">Tu Carrito</h2>
+      <div id="cart-items" class="cart-items" aria-live="polite">
+        <!-- Items del carrito -->
+      </div>
+      <div class="cart-summary">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span id="cart-total-price" aria-live="polite">€0.00</span>
+        </div>
+        <div class="cart-actions">
+          <button id="empty-cart" class="btn-secondary" aria-label="Vaciar carrito de compras">Vaciar Carrito</button>
+          <button id="generate-invoice" class="btn-primary" aria-label="Generar factura de compra">Generar Factura</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../shared/js/utils.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>

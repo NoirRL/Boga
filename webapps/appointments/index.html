@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda de Citas</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Agenda tu Cita</h1>
+    </header>
+    
+    <main>
+      <div class="booking-container">
+        <section class="user-info">
+          <h2>Tu información</h2>
+          <div id="user-data-container">
+            <div class="loading" id="user-loading" aria-live="polite">
+              <div class="spinner" aria-hidden="true"></div>
+              <p>Cargando datos del usuario...</p>
+            </div>
+          </div>
+        </section>
+        
+        <section class="appointment-form">
+          <h2>Detalles de la Cita</h2>
+          <form id="appointment-form" aria-labelledby="form-heading">
+            <div class="form-group">
+              <label for="appointment-date">Fecha:</label>
+              <input type="date" id="appointment-date" required aria-required="true">
+            </div>
+            
+            <div class="form-group">
+              <label for="appointment-time">Hora:</label>
+              <select id="appointment-time" required aria-required="true">
+                <option value="">Selecciona una hora</option>
+                <!-- Las horas se cargarán dinámicamente -->
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="appointment-reason">Motivo de la cita:</label>
+              <select id="appointment-reason" required aria-required="true">
+                <option value="">Selecciona un motivo</option>
+                <option value="consulta">Consulta de tallas</option>
+                <option value="compra">Asesoramiento para compra</option>
+                <option value="devolución">Gestionar devolución</option>
+                <option value="otro">Otro (especificar en notas)</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="appointment-notes">Notas adicionales:</label>
+              <textarea id="appointment-notes" rows="4" placeholder="Escribe aquí tus notas o requisitos especiales..." aria-label="Notas adicionales"></textarea>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" id="submit-button">Agendar Cita</button>
+            </div>
+          </form>
+        </section>
+        
+        <section class="my-appointments">
+          <h2>Mis Citas</h2>
+          <div id="appointments-container">
+            <div class="loading" id="appointments-loading" aria-live="polite">
+              <div class="spinner" aria-hidden="true"></div>
+              <p>Cargando tus citas...</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    
+    <footer>
+      <p>Tienda de Ropa © 2025</p>
+    </footer>
+  </div>
+
+  <!-- Modal de confirmación -->
+  <div id="confirmation-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="confirmation-title">
+    <div class="modal-content">
+      <span class="close-button" aria-label="Cerrar">&times;</span>
+      <h2 id="confirmation-title">Confirmación de Cita</h2>
+      <div id="confirmation-details"></div>
+      <div class="confirmation-actions">
+        <button id="confirm-appointment">Confirmar</button>
+        <button id="cancel-booking">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de éxito -->
+  <div id="success-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="success-title">
+    <div class="modal-content">
+      <h2 id="success-title">¡Cita Agendada!</h2>
+      <p>Tu cita ha sido agendada correctamente.</p>
+      <div class="success-details" id="success-details"></div>
+      <div class="success-actions">
+        <button id="close-success">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../shared/js/utils.js"></script>
+  <script src="js/appointments.js"></script>
+</body>
+</html>

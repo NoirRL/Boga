@@ -1,0 +1,646 @@
+/* Variables CSS para colores y valores comunes */
+:root {
+  --primary-color: #007bff;
+  --primary-dark: #0069d9;
+  --success-color: #28a745;
+  --success-dark: #218838;
+  --danger-color: #dc3545;
+  --danger-dark: #c82333;
+  --info-color: #17a2b8;
+  --info-dark: #138496;
+  --dark-color: #343a40;
+  --light-color: #f8f9fa;
+  --border-color: #dee2e6;
+  --text-color: #2c3e50;
+  --text-muted: #6c757d;
+  --purple-color: #9c27b0;
+  --purple-dark: #7b1fa2;
+  
+  --border-radius: 4px;
+  --spacing-sm: 0.5rem;
+  --spacing: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+}
+
+/* Estilos generales */
+body {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header y navegación */
+header {
+  background-color: var(--dark-color);
+  color: white;
+  padding: var(--spacing);
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing);
+}
+
+nav button {
+  background-color: transparent;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: var(--spacing-sm) var(--spacing);
+  margin: 0 var(--spacing-sm);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+nav button.active {
+  background-color: white;
+  color: var(--dark-color);
+}
+
+main {
+  flex: 1;
+  padding: var(--spacing-xl);
+}
+
+/* Estilos para tabs */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Estilos para productos */
+.products-management {
+  width: 100%;
+}
+
+.actions-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+}
+
+.search-filter {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.search-filter input,
+.search-filter select {
+  padding: var(--spacing-sm);
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+}
+
+/* Botones */
+.add-button {
+  background-color: var(--success-color);
+  color: white;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: var(--success-dark);
+}
+
+.actions button {
+  padding: 0.25rem var(--spacing-sm);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  background-color: var(--info-color);
+  color: white;
+}
+
+.actions button:hover {
+  background-color: var(--info-dark);
+}
+
+.actions .delete-button,
+.delete-button {
+  background-color: var(--danger-color);
+}
+
+.actions .delete-button:hover,
+.delete-button:hover {
+  background-color: var(--danger-dark);
+}
+
+.btn-confirm {
+  background-color: var(--success-color);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background-color: var(--danger-color);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.btn-confirm:hover {
+  background-color: var(--success-dark);
+}
+
+.btn-cancel:hover {
+  background-color: var(--danger-dark);
+}
+
+.promote-btn {
+  background-color: var(--purple-dark);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.promote-btn:hover {
+  background-color: var(--purple-color);
+}
+
+/* Estilos para tablas */
+.products-table,
+.appointments-table,
+.invoice-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--spacing);
+}
+
+.products-table th,
+.products-table td,
+.appointments-table th,
+.appointments-table td {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.products-table th,
+.appointments-table th {
+  background-color: var(--light-color);
+}
+
+.invoice-items-table th {
+  background-color: var(--light-color);
+  text-align: left;
+  padding: 10px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.invoice-items-table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.invoice-items-table .text-right {
+  text-align: right;
+}
+
+.invoice-items-table tfoot tr {
+  background-color: var(--light-color);
+}
+
+.invoice-items-table tfoot .total-row {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+/* Imágenes y elementos visuales */
+.product-thumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+}
+
+.no-image {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-color);
+  border-radius: var(--border-radius);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.invoice-product-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: var(--border-radius);
+}
+
+/* Acciones en tablas */
+.actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+/* Estilos para modales */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background-color: white;
+  padding: var(--spacing-xl);
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-content.confirmation {
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  padding: 15px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-button {
+  position: absolute;
+  top: var(--spacing);
+  right: var(--spacing);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+/* Estilos para formularios */
+.form-group {
+  margin-bottom: var(--spacing);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+}
+
+.form-group textarea {
+  height: 100px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing);
+  margin-top: var(--spacing-lg);
+}
+
+.form-actions button {
+  padding: var(--spacing-sm) var(--spacing);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.form-actions button[type="submit"] {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Estilos para citas */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing);
+  background-color: var(--light-color);
+  border-radius: var(--border-radius);
+}
+
+.date-filter, .status-filter {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+}
+
+.status-badge.pending {
+  background-color: #ffeeba;
+  color: #856404;
+}
+
+.status-badge.confirmed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-badge.cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Estilos para detalles de cita */
+.appointment-details {
+  margin-top: var(--spacing);
+}
+
+.detail-row {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+/* Etiquetas */
+.tags-input-container {
+  margin-top: var(--spacing-sm);
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #e9ecef;
+  color: #495057;
+  padding: 0.25rem var(--spacing-sm);
+  border-radius: var(--border-radius);
+  font-size: 0.85rem;
+}
+
+.tag-remove {
+  margin-left: var(--spacing-sm);
+  cursor: pointer;
+  color: var(--danger-color);
+  font-weight: bold;
+}
+
+.tag-remove:hover {
+  color: var(--danger-dark);
+}
+
+/* Estilos para facturas */
+.invoice-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.invoice-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.invoice-date {
+  color: #7f8c8d;
+}
+
+.invoice-status {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.invoice-client, .invoice-address, .invoice-items, .invoice-notes {
+  margin-bottom: 20px;
+}
+
+.invoice-client h3, .invoice-address h3, .invoice-items h3, .invoice-notes h3 {
+  color: var(--text-color);
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.client-details p {
+  margin: 5px 0;
+}
+
+.invoice-product {
+  display: flex;
+  align-items: center;
+}
+
+.invoice-product-name {
+  font-weight: 500;
+}
+
+.invoice-product-variant {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+}
+
+.status-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.view-customer {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.view-customer:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para detalles de cliente */
+.customer-info {
+  padding: 15px;
+}
+
+.customer-header {
+  margin-bottom: 15px;
+}
+
+.customer-header h3 {
+  margin: 0 0 5px 0;
+  color: var(--text-color);
+}
+
+.customer-id, .customer-telegram-id {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.customer-contact {
+  margin: 15px 0;
+}
+
+.contact-item {
+  margin-bottom: 10px;
+}
+
+.contact-item a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.customer-address, .customer-history {
+  margin-top: 15px;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 3px 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+
+.badge.super-admin {
+  background-color: var(--purple-color);
+  color: white;
+}
+
+/* Mensajes de error */
+.form-errors {
+  margin-bottom: 15px;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px 15px;
+  border: 1px solid #f5c6cb;
+  border-radius: var(--border-radius);
+}
+
+.error-message h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.error-message ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* Animaciones */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Responsive para facturas */
+@media (max-width: 768px) {
+  .invoice-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .invoice-date, .invoice-status {
+    margin-top: 10px;
+  }
+  
+  .modal-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .status-actions {
+    width: 100%;
+  }
+}
